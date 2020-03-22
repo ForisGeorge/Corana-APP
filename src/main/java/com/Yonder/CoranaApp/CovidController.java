@@ -22,7 +22,7 @@ public class CovidController {
     }
 
     @GetMapping(path = "/countries/{name}")
-    public Country countryVariable (@PathVariable String name){
+    public Country[] countryVariable (@PathVariable String name){
         return callRestService.getCountry(name);
     }
 }

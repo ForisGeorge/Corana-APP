@@ -16,9 +16,9 @@ public class CallRestService {
         return countries;
     }
 
-    public Country getCountry(String name){
+    public Country[] getCountry(String name){
         RestTemplate restTemplate = new RestTemplate();
-        Country country = restTemplate.getForObject(String.format("https://api.covid19api.com/country/%s/status/confirmed",name),Country.class);
+        Country[] country = restTemplate.getForObject(String.format("https://api.covid19api.com/country/%s/status/confirmed",name),Country[].class);
         return country;
 
     }
