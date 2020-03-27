@@ -1,28 +1,32 @@
 package com.Yonder.CoranaApp;
 
-import Countries.AllCountries;
-import Countries.Country;
-import Services.CallRestService;
-import org.springframework.stereotype.Component;
+import com.Yonder.CoranaApp.Countries.AllCountries;
+import com.Yonder.CoranaApp.Countries.Country;
+import com.Yonder.CoranaApp.Services.CallRestService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @RestController
 public class CovidController {
 
 
-    private CallRestService callRestService= new CallRestService();
+    private CallRestService callRestService;
+
+    public CovidController(CallRestService callRestService) {
+        this.callRestService = callRestService;
+    }
 
     @GetMapping(path = "/countries")
-    public AllCountries[] allCountries(){
+    public List<AllCountries> allCountries(){
 
         return  callRestService.countries();
     }
 
     @GetMapping(path = "/countries/{name}")
-    public Country[] countryVariable (@PathVariable String name){
+    public List<Country> countryVariable (@PathVariable String name){
         return callRestService.getCountry(name);
     }
 }
